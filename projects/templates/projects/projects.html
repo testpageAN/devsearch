@@ -6,21 +6,27 @@
 </head>
 <body>
 <h1>Projects</h1>
-{% extends 'main.html' %}
 
-{% block content %}
-
-    <p>Hello, you are in {{ page }} page</p>
-    {% if number > 10 %}
-        <p>Number is greater than 10</p>
-        {% else %}
-        <p>Number is less than 10</p>
-    {% endif %}
-    <hr>
+    <table>
+        <tr>
+            <th>ID</th>
+            <th>Project</th>
+            <th>Votes</th>
+            <th>Ratio</th>
+        </tr>
+        {% for project in projects %}
+            <tr>
+            <td>{{ project.id }}</td>
+            <td><a href="{% url 'project' project.id %}">{{ project.title }}</a></td>
+            <td>{{ project.votes }}</td>
+            <td>{{ project.ratio }}</td>
+            </tr>
+        {% endfor %}
+    </table>
     <p>Projects</p>
     <ul>
         {% for project in projects %}
-            <li>Title: <a href="{% url 'project' project.id %}">{{ project.title }}</a> </li>
+            <li>Title: <a href="{% url 'project' project.id %}">{{ project.title }} -- {{ project.created }}</a> </li>
         {% endfor %}
     </ul>
 
