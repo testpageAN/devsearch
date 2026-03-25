@@ -5,6 +5,10 @@
     <title>Projects</title>
 </head>
 <body>
+{% extends 'main.html' %}
+
+{% block content %}
+
 <h1>Projects</h1>
 
     <table>
@@ -12,23 +16,20 @@
             <th>ID</th>
             <th>Project</th>
             <th>Votes</th>
-            <th>Ratio</th>
+            <th>Positive Votes</th>
+            <th></th>
         </tr>
         {% for project in projects %}
             <tr>
             <td>{{ project.id }}</td>
-            <td><a href="{% url 'project' project.id %}">{{ project.title }}</a></td>
-            <td>{{ project.votes }}</td>
-            <td>{{ project.ratio }}</td>
+            <td>{{ project.title }}</td>
+            <td>{{ project.vote_total }}</td>
+            <td>{{ project.vote_ratio }}%</td>
+            <td>{{ project.created }}</td>
+            <td><a href="{% url 'project' project.id %}">View</a></td>
             </tr>
         {% endfor %}
     </table>
-    <p>Projects</p>
-    <ul>
-        {% for project in projects %}
-            <li>Title: <a href="{% url 'project' project.id %}">{{ project.title }} -- {{ project.created }}</a> </li>
-        {% endfor %}
-    </ul>
 
 {% endblock content %}
 </body>
