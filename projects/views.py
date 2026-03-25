@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponse
+from .models import Project
 
 projectsList = [
     {
@@ -19,21 +20,17 @@ projectsList = [
     }
 ]
 def projects(request):
-    page = 'projects'
-    number =9
+    projects = Project.objects.all()
     context = {
-        'page': page,
-        'number': number,
-        'projects': projectsList,
+        'projects': projects,
     }
     return render(request, 'projects/projects.html', context=context)
 
 def project(request, pk):
-    projectObj=None
-    for i in projectsList:
-        if i['id'] == pk:
-            projectObj = i
+    projectObj=Project.objects.get(pk=pk)
     return render(request, 'projects/single-project.html',
-                  {'project': projectObj}
+                  {
+                    'project': projectObj,
+                    }
                   )
 # Create your views here.
