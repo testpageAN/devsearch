@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Projects</title>
+</head>
+<body>
+<h1>Projects</h1>
+{% extends 'main.html' %}
+
+{% block content %}
+
+    <p>Hello, you are in {{ page }} page</p>
+    {% if number > 10 %}
+        <p>Number is greater than 10</p>
+        {% else %}
+        <p>Number is less than 10</p>
+    {% endif %}
+    <hr>
+    <p>Projects</p>
+    <ul>
+        {% for project in projects %}
+            <li>Title: <a href="{% url 'project' project.id %}">{{ project.title }}</a> </li>
+        {% endfor %}
+    </ul>
+
+{% endblock content %}
+</body>
+</html>
